@@ -18,6 +18,12 @@ app.use('/uploads', express.static('uploads'))
 // app.use(express.static('uploads'))
 
 app.post('/api/upload',function(req , res){
+  if (!req.file) {
+    return res.json({
+      "success": false,
+      "error": "Please input correct file name"
+    })
+  }
 	upload(req , res , function(err, rs) {
 		if(err) {
 			return res.json({
